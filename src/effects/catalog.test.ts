@@ -1,0 +1,40 @@
+import { categories, effectCatalog } from './catalog';
+
+describe('effect catalog', () => {
+  it('contains the approved fifteen-effect curated pack', () => {
+    expect(effectCatalog).toHaveLength(15);
+    expect(effectCatalog.map(item => item.name)).toEqual([
+      'BlurText',
+      'SplitText',
+      'CountUp',
+      'FadeContent',
+      'Magnet',
+      'ClickSpark',
+      'SpotlightCard',
+      'AnimatedList',
+      'Dock',
+      'Border Glow',
+      'Stepper',
+      'Flowing Menu',
+      'Aurora',
+      'DotGrid',
+      'Threads'
+    ]);
+  });
+
+  it('keeps ids unique and source URLs on reactbits.dev', () => {
+    const ids = new Set(effectCatalog.map(item => item.id));
+    expect(ids.size).toBe(effectCatalog.length);
+    for (const item of effectCatalog) {
+      expect(item.sourceUrl.startsWith('https://reactbits.dev/')).toBe(true);
+      expect(item.snippet).toContain(item.importName);
+    }
+  });
+
+  it('covers every visible category', () => {
+    expect(categories.map(category => category.id)).toEqual(['all', 'text', 'interaction', 'ui', 'background']);
+    for (const category of ['text', 'interaction', 'ui', 'background']) {
+      expect(effectCatalog.some(item => item.category === category)).toBe(true);
+    }
+  });
+});
