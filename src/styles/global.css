@@ -248,6 +248,13 @@ input:focus-visible {
   color: var(--accent);
 }
 
+.detail-grid .dependency-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.75;
+}
+
 .snippet-card > div {
   display: flex;
   align-items: center;

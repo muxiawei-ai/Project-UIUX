@@ -142,6 +142,9 @@ export function EffectLab() {
             {activeEffect ? (
               <>
                 <p>{activeEffect.dependencies.join(', ')}</p>
+                <p className="dependency-note">
+                  Needed when adopting the original component. This local preview is a React-only approximation.
+                </p>
                 <a href={activeEffect.sourceUrl} target="_blank" rel="noreferrer">
                   React Bits source
                 </a>

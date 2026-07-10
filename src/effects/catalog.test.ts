@@ -37,4 +37,20 @@ describe('effect catalog', () => {
       expect(effectCatalog.some(item => item.category === category)).toBe(true);
     }
   });
+
+  it('lists the original component dependencies for adoption cost', () => {
+    const byId = new Map(effectCatalog.map(item => [item.id, item.dependencies]));
+
+    for (const item of effectCatalog) {
+      expect(item.dependencies[0]).toBe('React');
+    }
+
+    expect(byId.get('aurora')).toContain('ogl');
+    expect(byId.get('threads')).toContain('ogl');
+    expect(byId.get('split-text')).toContain('gsap');
+    expect(byId.get('flowing-menu')).toContain('gsap');
+    expect(byId.get('dot-grid')).toContain('gsap');
+    expect(byId.get('dock')).toContain('motion');
+    expect(byId.get('fade-content')).toEqual(['React']);
+  });
 });
