@@ -70,9 +70,12 @@ input:focus-visible {
 }
 
 .lab-sidebar {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  max-height: 100vh;
   border-right: 1px solid var(--line);
   background: #14171e;
   padding: 24px;
@@ -148,7 +151,10 @@ input:focus-visible {
 
 .effect-list {
   display: grid;
+  flex: 1;
+  align-content: start;
   gap: 8px;
+  min-height: 0;
   overflow: auto;
   padding-right: 4px;
 }
@@ -176,6 +182,7 @@ input:focus-visible {
   display: grid;
   gap: 18px;
   align-content: start;
+  min-width: 0;
   padding: 24px;
 }
 
@@ -217,6 +224,7 @@ input:focus-visible {
 
 .detail-grid article,
 .snippet-card {
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -367,7 +375,7 @@ input:focus-visible {
   border-radius: 50%;
   background: var(--warning);
   animation: spark 520ms ease-out both;
-  transform: rotate(calc(var(--spark-index) * 72deg)) translateX(0);
+  transform: rotate(var(--spark-angle, 0deg)) translateX(0);
 }
 
 .demo-spotlight-card {
@@ -751,7 +759,7 @@ input:focus-visible {
 @keyframes spark {
   to {
     opacity: 0;
-    transform: rotate(calc(var(--spark-index) * 72deg)) translateX(64px);
+    transform: rotate(var(--spark-angle, 0deg)) translateX(64px);
   }
 }
 
@@ -774,12 +782,19 @@ input:focus-visible {
 
 @media (max-width: 960px) {
   .effect-lab {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lab-sidebar {
+    position: static;
+    max-height: none;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .effect-list {
+    flex: none;
+    max-height: 340px;
   }
 
   .detail-grid {

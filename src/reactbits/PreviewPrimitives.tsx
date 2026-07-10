@@ -374,22 +374,30 @@ export function MagnetPrimitive() {
   );
 }
 
+type Spark = {
+  id: number;
+  angle: number;
+};
+
 export function ClickSparkPrimitive({ resetKey }: ResetProps) {
-  const [sparks, setSparks] = useState<number[]>([]);
+  const [sparks, setSparks] = useState<Spark[]>([]);
+  const nextSparkId = useRef(0);
 
   useEffect(() => {
     setSparks([]);
   }, [resetKey]);
 
+  function addSpark() {
+    const id = nextSparkId.current;
+    nextSparkId.current += 1;
+    setSparks(current => [...current.slice(-4), { id, angle: (id % 5) * 72 }]);
+  }
+
   return (
-    <button
-      className="demo-click-spark"
-      type="button"
-      onClick={() => setSparks(current => [...current.slice(-4), Date.now()])}
-    >
+    <button className="demo-click-spark" type="button" onClick={addSpark}>
       <span>Click for spark</span>
-      {sparks.map((spark, index) => (
-        <i key={spark} style={{ '--spark-index': index } as CSSProperties} />
+      {sparks.map(spark => (
+        <i key={spark.id} style={{ '--spark-angle': `${spark.angle}deg` } as CSSProperties} />
       ))}
     </button>
   );

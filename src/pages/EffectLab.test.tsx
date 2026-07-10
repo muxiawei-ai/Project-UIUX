@@ -158,6 +158,24 @@ describe('EffectLab', () => {
     expect(spotlight).toHaveStyle('--y: 50.0%');
   });
 
+  it('keeps spark angles stable across rapid clicks', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<EffectLab />);
+
+    await user.click(screen.getByRole('button', { name: /ClickSpark/i }));
+    const sparkButton = screen.getByRole('button', { name: /click for spark/i });
+
+    for (let click = 0; click < 7; click += 1) {
+      fireEvent.click(sparkButton);
+    }
+
+    const sparks = container.querySelectorAll('.demo-click-spark i');
+    expect(sparks).toHaveLength(5);
+
+    const angles = Array.from(sparks).map(spark => (spark as HTMLElement).style.getPropertyValue('--spark-angle'));
+    expect(new Set(angles).size).toBe(5);
+  });
+
   it('renders Border Glow as a cursor-directed edge glow', async () => {
     const user = userEvent.setup();
     const { container } = render(<EffectLab />);

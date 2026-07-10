@@ -54,7 +54,7 @@ export function EffectLab() {
           <span>{effectCatalog.length} effects</span>
         </div>
 
-        <div className="category-tabs" aria-label="Effect categories">
+        <div className="category-tabs" role="group" aria-label="Effect categories">
           {categories.map(item => (
             <button
               key={item.id}
@@ -78,7 +78,7 @@ export function EffectLab() {
           />
         </label>
 
-        <div className="effect-list" aria-label="Effect list">
+        <div className="effect-list" role="group" aria-label="Effect list">
           {filteredEffects.map(item => (
             <button
               key={item.id}

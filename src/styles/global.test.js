@@ -42,3 +42,14 @@ describe('Border Glow styles', () => {
     expect(edgeLightRule).toMatch(/mix-blend-mode:\s*plus-lighter/);
   });
 });
+
+describe('layout overflow guards', () => {
+  it('keeps grid columns and panels from expanding past the viewport', () => {
+    const previewPanelRule = ruleBody('.preview-panel');
+    const cardRule = ruleBody('.snippet-card');
+
+    expect(previewPanelRule).toMatch(/min-width:\s*0/);
+    expect(cardRule).toMatch(/min-width:\s*0/);
+    expect(cssText).toMatch(/@media \(max-width: 960px\)[\s\S]*?\.effect-lab \{\s*grid-template-columns:\s*minmax\(0, 1fr\)/);
+  });
+});
