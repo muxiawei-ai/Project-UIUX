@@ -1,0 +1,19 @@
+{
+  "_comment": "字段映射。左边是脚本内部用的名字，右边填你自己数据里的字段名。复制成 config.json 再改，只写需要改的键即可。",
+  "answers": {
+    "id": "id",
+    "title": "title",
+    "text": "text"
+  },
+  "questions": {
+    "id": "id",
+    "text": "text",
+    "expected": "expected",
+    "expect_handoff": "expect_handoff"
+  },
+  "predictions": {
+    "question_id": "question_id",
+    "predicted": "predicted",
+    "candidates": "candidates"
+  }
+}

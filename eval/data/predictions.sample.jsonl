@@ -1,0 +1,15 @@
+{"question_id": "Q001", "predicted": "A012", "candidates": ["A012", "A031", "A044"]}
+{"question_id": "Q002", "predicted": "A012", "candidates": ["A012", "A052"]}
+{"question_id": "Q003", "predicted": "A031", "candidates": ["A031", "A012"]}
+{"question_id": "Q004", "predicted": "A031", "candidates": ["A031", "A012"]}
+{"question_id": "Q005", "predicted": "A031", "candidates": ["A031", "A044"]}
+{"question_id": "Q006", "predicted": "A007", "candidates": ["A007", "A009"]}
+{"question_id": "Q007", "predicted": "A009", "candidates": ["A009", "A007"]}
+{"question_id": "Q008", "predicted": "A009", "candidates": ["A009", "A007"]}
+{"question_id": "Q009", "predicted": "A044", "candidates": ["A044", "A052"]}
+{"question_id": "Q010", "predicted": "A052", "candidates": ["A052", "A044"]}
+{"question_id": "Q011", "predicted": "A009", "candidates": ["A009", "A007"]}
+{"question_id": "Q012", "predicted": null, "candidates": ["A044", "A052"]}
+{"question_id": "Q013", "predicted": null, "candidates": ["A044"]}
+{"question_id": "Q014", "predicted": "A012", "candidates": ["A012", "A044"]}
+{"question_id": "Q015", "predicted": "A012", "candidates": ["A012", "A031"]}

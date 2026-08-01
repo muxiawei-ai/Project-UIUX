@@ -1,0 +1,15 @@
+{"id": "Q001", "text": "人脸识别老是失败怎么办", "expected": ["A012"]}
+{"id": "Q002", "text": "刷脸过不去", "expected": ["A012"]}
+{"id": "Q003", "text": "认证不了脸", "expected": ["A012"]}
+{"id": "Q004", "text": "app 一打开就闪退", "expected": ["A031"]}
+{"id": "Q005", "text": "软件老是自己关掉", "expected": ["A031"]}
+{"id": "Q006", "text": "我这个月哪天还款", "expected": ["A007"]}
+{"id": "Q007", "text": "你们贷款利率是多少，能给我推荐个方案吗", "expected": [], "expect_handoff": true}
+{"id": "Q008", "text": "我还能用多少额度", "expected": ["A009"]}
+{"id": "Q009", "text": "密码忘了", "expected": ["A044"]}
+{"id": "Q010", "text": "银行卡绑不上", "expected": ["A052"]}
+{"id": "Q011", "text": "还款日和额度在哪看", "expected": ["A007", "A009"]}
+{"id": "Q012", "text": "我想投诉你们的客户经理", "expected": [], "expect_handoff": true}
+{"id": "Q013", "text": "换手机号了怎么重置密码", "expected": ["A044"]}
+{"id": "Q014", "text": "刷脸失败了还能用别的方式吗", "expected": ["A012"]}
+{"id": "Q015", "text": "闪退，卸了重装也不行", "expected": ["A031"]}
