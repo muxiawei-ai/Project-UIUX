@@ -217,10 +217,9 @@ input:focus-visible {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    radial-gradient(circle at 20% 10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 30%),
-    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 34%),
-    var(--surface);
+  /* Recessed well, no tint: the stage sits below the cards around it so the
+     running effect owns every hue on screen. See DESIGN.md §0 and §4. */
+  background: var(--page);
   padding: 24px;
 }
 

@@ -96,7 +96,11 @@ Pills are for demo affordances only; chrome never uses them.
 
 **Focus** — `2px solid var(--accent)`, offset 2. Never removed, never dimmed.
 
-**Stage** — 1px `--line`, radius 8, min-height 360.
+**Stage** — 1px `--line`, radius 8, min-height 360, flat `--page` fill. A **recessed
+well**: darker than the cards around it, and completely untinted. Verified against
+`Aurora` and `SpotlightCard` — on `--surface` the translucent demo cards stop separating
+from the ground, and any hue in the stage desaturates whatever effect is running on top
+of it. The stage contributes no color of its own.
 
 ## 5. Layout Principles
 
@@ -130,6 +134,7 @@ exception and owns its own shadow stack — it is *content*, not chrome.
   it never carries meaning, never marks state.
 - Add a radius value outside {8, 50%, 999}.
 - Animate the chrome on load. Only the stage animates on its own.
+- Put a hue in the stage background. It desaturates whatever effect is running on it.
 
 ## 8. Responsive Behavior
 
@@ -152,14 +157,13 @@ as text.
 
 Recorded, not hidden. Fix or ratify deliberately.
 
-1. **`.preview-stage` carries a mint + blue radial tint.** It violates §0 — the frame is
-   tinted with the same hues the effects use, so aurora/spotlight/threads demos compete
-   with their own backdrop. Visible in a screenshot of `BlurText`. Neutralizing the stage
-   to flat `--surface` is a one-line change, but it is a taste call the maintainer should
-   make, not an agent.
-2. **`.border-glow-card` keeps its vendored palette** (`#120f17`, `hsl()` mesh gradients,
+1. **`.border-glow-card` keeps its vendored palette** (`#120f17`, `hsl()` mesh gradients,
    `--glow-color` stack). This is upstream ReactBits identity and `global.test.js` asserts
    on its structure. Leave it alone.
-3. **Inter is the UI face.** `redesign-existing-projects` flags Inter as a generic default.
+2. **Inter is the UI face.** `redesign-existing-projects` flags Inter as a generic default.
    Kept deliberately: the chrome is supposed to disappear, and a characterful face would
    pull attention off the stage.
+
+**Resolved:** the stage previously carried a mint + blue radial tint, which violated §0.
+Flattened to `--page` after rendering `Aurora` and `SpotlightCard` against three candidate
+grounds — see §4.
