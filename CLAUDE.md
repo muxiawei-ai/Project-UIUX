@@ -35,6 +35,15 @@ npm run build   # tsc -b && vite build
 npm test        # vitest run
 ```
 
+## Browsing the lab
+
+`.github/workflows/pages.yml` republishes the lab on every push to `main`, at
+`https://<owner>.github.io/<repo>/`. **One-time setup:** repo Settings → Pages → Source:
+"GitHub Actions". The workflow runs the tests before deploying, so a red build never ships.
+
+`docs/toolbox.md` is the tool index, organised by "I need to do X" rather than by category.
+A weekly Routine scouts mobile UI/UX and typography and reports what's worth stealing.
+
 `src/styles/global.test.js` asserts on the `.border-glow-card` CSS as text — it reads the
 stylesheet with `readFileSync` and matches rule bodies, so reformatting those rules breaks
 the test even when the CSS is still valid.
