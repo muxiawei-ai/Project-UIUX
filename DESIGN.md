@@ -157,9 +157,12 @@ as text.
 
 Recorded, not hidden. Fix or ratify deliberately.
 
-1. **`.border-glow-card` keeps its vendored palette** (`#120f17`, `hsl()` mesh gradients,
-   `--glow-color` stack). This is upstream ReactBits identity and `global.test.js` asserts
-   on its structure. Leave it alone.
+1. **`.border-glow-card`'s CSS colour fallbacks are dead code.** The rule reads
+   `var(--gradient-one, radial-gradient(… hsl(268deg 100% 76%) …))` and friends, but
+   `BorderGlowCard` writes all of those custom properties as **inline styles** on every
+   render, so the fallbacks never apply. Change the colours at the call site
+   (`BorderGlowPrimitive`), not in the stylesheet. The fallbacks stay as-is because
+   `global.test.js` matches those rule bodies as text.
 2. **Inter is the UI face.** `redesign-existing-projects` flags Inter as a generic default.
    Kept deliberately: the chrome is supposed to disappear, and a characterful face would
    pull attention off the stage.
@@ -167,3 +170,13 @@ Recorded, not hidden. Fix or ratify deliberately.
 **Resolved:** the stage previously carried a mint + blue radial tint, which violated §0.
 Flattened to `--page` after rendering `Aurora` and `SpotlightCard` against three candidate
 grounds — see §4.
+
+**Resolved:** `BorderGlow` ran on Tailwind `violet-400 / pink-400 / sky-400` with an
+`hsl()` glow. Now `var(--violet-11) / var(--pink-11) / var(--sky-11)`, card body
+`var(--violet-1)`, edge glow `var(--amber-12)`. Step 11 across all three stops — it is
+the vivid step on a dark ground, and one uniform step keeps the mesh coherent.
+`buildGlowVars` gained a pass-through so `glowColor` accepts any CSS colour, deriving its
+alpha ramp with `color-mix` instead of rebuilding an `hsl()` string.
+
+**Rainbow effects are exempt from the single-accent rule (§7).** The mesh is content —
+its whole job is hue variety. The rule governs chrome.

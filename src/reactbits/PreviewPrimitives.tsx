@@ -23,23 +23,27 @@ const borderGlowGradientKeys = [
 ];
 const borderGlowColorMap = [0, 1, 2, 0, 1, 2, 1];
 
+/** Parses the legacy `"H S L"` triplet. Returns null for any other CSS colour
+ *  (a hex, or a `var(--token)`) so callers can pass it through untouched. */
 function parseHslValue(hsl: string) {
-  const match = hsl.match(/([\d.]+)\s*([\d.]+)%?\s*([\d.]+)%?/);
+  const match = hsl.match(/^\s*([\d.]+)\s+([\d.]+)%?\s+([\d.]+)%?\s*$/);
   if (!match) {
-    return { h: 40, s: 80, l: 80 };
+    return null;
   }
 
   return { h: Number.parseFloat(match[1]), s: Number.parseFloat(match[2]), l: Number.parseFloat(match[3]) };
 }
 
 function buildGlowVars(glowColor: string, intensity: number) {
-  const { h, s, l } = parseHslValue(glowColor);
-  const base = `${h}deg ${s}% ${l}%`;
+  const hsl = parseHslValue(glowColor);
+  const base = hsl ? `hsl(${hsl.h}deg ${hsl.s}% ${hsl.l}%)` : glowColor;
   const opacities = [100, 60, 50, 40, 30, 20, 10];
   const suffixes = ['', '-60', '-50', '-40', '-30', '-20', '-10'];
 
   return opacities.reduce<Record<string, string>>((vars, opacity, index) => {
-    vars[`--glow-color${suffixes[index]}`] = `hsl(${base} / ${Math.min(opacity * intensity, 100)}%)`;
+    const alpha = Math.min(opacity * intensity, 100);
+    vars[`--glow-color${suffixes[index]}`] =
+      alpha >= 100 ? base : `color-mix(in srgb, ${base} ${alpha}%, transparent)`;
     return vars;
   }, {});
 }
@@ -472,7 +476,13 @@ export function DockPrimitive() {
 
 export function BorderGlowPrimitive() {
   return (
-    <BorderGlowCard className="demo-border-glow" animated>
+    <BorderGlowCard
+      className="demo-border-glow"
+      animated
+      backgroundColor="var(--violet-1)"
+      glowColor="var(--amber-12)"
+      colors={['var(--violet-11)', 'var(--pink-11)', 'var(--sky-11)']}
+    >
       <div className="demo-border-glow-content">
         <Sparkles size={34} aria-hidden="true" />
         <span>Border Glow</span>

@@ -5,6 +5,10 @@
 @import "@radix-ui/colors/mint-dark.css";
 @import "@radix-ui/colors/blue-dark.css";
 @import "@radix-ui/colors/amber-dark.css";
+/* mesh hues for the BorderGlow effect — content, not chrome (DESIGN.md §10) */
+@import "@radix-ui/colors/violet-dark.css";
+@import "@radix-ui/colors/pink-dark.css";
+@import "@radix-ui/colors/sky-dark.css";
 
 /* Semantic tokens. Read DESIGN.md before changing a mapping — the step number
    carries the meaning (9 = solid fill, 11 = readable text, 12 = high contrast). */
